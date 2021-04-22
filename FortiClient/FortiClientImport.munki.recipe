@@ -3,17 +3,24 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the latest version of MakeMKV and imports it into a munki_repo.</string>
+    <string>Copies the FortiClient mpkg out from a FortiClient .dmg download and imports it into a munki_repo.
+
+To use this recipe:
+
+1) Create a recipe override of this recipe.
+2) Acquire your instance's FortiClient DMG with contained installer.
+3) Copy the downloaded DMG onto your Mac running autopkg in the folder specified in the PATH variable. Don't include a trailing '/'.
+4) Run the recipe.</string>
     <key>Identifier</key>
-    <string>com.github.apizz.munki.MakeMKV</string>
+    <string>com.github.apizz.munki.FortiClientImport</string>
     <key>Input</key>
     <dict>
         <key>MUNKI_CATEGORY</key>
-        <string>Video</string>
+        <string>VPN</string>
         <key>MUNKI_REPO_SUBDIR</key>
-        <string>apps/makemkv</string>
+        <string>apps/forticlient</string>
         <key>NAME</key>
-        <string>MakeMKV</string>
+        <string>FortiClient</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -23,11 +30,11 @@
             <key>category</key>
             <string>%MUNKI_CATEGORY%</string>
             <key>description</key>
-            <string>MakeMKV is your one-click solution to convert video that you own into free and patents-unencumbered format that can be played everywhere. MakeMKV is a format converter, otherwise called "transcoder". It converts the video clips from proprietary (and usually encrypted) disc into a set of MKV files, preserving most information but not changing it in any way.</string>
+            <string>FortiClient uses SSL and IPSec VPN to provide secure, reliable access to corporate networks and applications from virtually any internet-connected remote location. FortiClient simplifies remote user experience with built-in auto-connect and always-up VPN features. Two-Factor authentication can also be used to provide an additional layer of security.</string>
             <key>developer</key>
-            <string>GuinpinSoft Inc</string>
+            <string>Fortinet</string>
             <key>display_name</key>
-            <string>MakeMKV</string>
+            <string>FortiClient VPN</string>
             <key>name</key>
             <string>%NAME%</string>
             <key>unattended_install</key>
@@ -35,9 +42,9 @@
         </dict>
     </dict>
     <key>MinimumVersion</key>
-    <string>0.5.0</string>
+    <string>0.4.0</string>
     <key>ParentRecipe</key>
-    <string>com.github.apizz.download.MakeMKV</string>
+    <string>com.github.apizz.pkg.FortiClientImport</string>
     <key>Process</key>
     <array>
         <dict>
@@ -45,6 +52,8 @@
             <dict>
                 <key>additional_pkginfo</key>
                 <dict>
+                    <key>minimum_os_version</key>
+                    <string>%min_os_version%</string>
                     <key>version</key>
                     <string>%version%</string>
                 </dict>
@@ -56,11 +65,9 @@
             <key>Arguments</key>
             <dict>
                 <key>pkg_path</key>
-                <string>%pathname%</string>
+                <string>%RECIPE_CACHE_DIR%/%NAME%.mpkg</string>
                 <key>repo_subdirectory</key>
                 <string>%MUNKI_REPO_SUBDIR%</string>
-                <key>version_comparison_key</key>
-                <string>CFBundleShortVersionString</string>
             </dict>
             <key>Processor</key>
             <string>MunkiImporter</string>

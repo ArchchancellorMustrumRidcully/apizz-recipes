@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the latest version of Chrome Remote Desktop and imports it into a munki_repo.</string>
+    <string>Downloads the latest version of Google Chrome, creates a PKG, and imports into a munki_repo.</string>
     <key>Identifier</key>
-    <string>com.github.apizz.munki.ChromeRemoteDesktop</string>
+    <string>com.github.apizz.munki.GoogleChromeUniversalPKG</string>
     <key>Input</key>
     <dict>
         <key>MUNKI_CATEGORY</key>
-        <string>Support Tools</string>
+        <string>Browsers</string>
         <key>MUNKI_REPO_SUBDIR</key>
-        <string>apps/googlechromeremotedesktop</string>
+        <string>apps/googlechromeuniversal</string>
         <key>NAME</key>
-        <string>ChromeRemoteDesktop</string>
+        <string>GoogleChromeUniversal</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -23,17 +23,13 @@
             <key>category</key>
             <string>%MUNKI_CATEGORY%</string>
             <key>description</key>
-            <string>Chrome Remote Desktop allows users to remotely access another computer through Chrome browser or a Chromebook.  Computers can be made available on an short-term basis for scenarios such as ad hoc remote support, or on a more long-term basis for remote access to your applications and files.  All connections are fully secured.</string>
+            <string>Chrome is a fast, simple, and secure web browser, built for the modern web.</string>
             <key>developer</key>
-            <string>Google Inc.</string>
+            <string>Google</string>
             <key>display_name</key>
-            <string>Chrome Remote Desktop</string>
+            <string>Google Chrome</string>
             <key>name</key>
             <string>%NAME%</string>
-            <key>requires</key>
-            <array>
-                <string>GoogleChrome</string>
-            </array>
             <key>unattended_install</key>
             <true/>
         </dict>
@@ -41,14 +37,14 @@
     <key>MinimumVersion</key>
     <string>1.0.0</string>
     <key>ParentRecipe</key>
-    <string>com.github.homebysix.pkg.ChromeRemoteDesktop</string>
+    <string>com.github.rtrouton.pkg.googlechromeuniversal</string>
     <key>Process</key>
     <array>
         <dict>
             <key>Arguments</key>
             <dict>
                 <key>pkg_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%-%version%.pkg</string>
+                <string>%pkg_path%</string>
                 <key>repo_subdirectory</key>
                 <string>%MUNKI_REPO_SUBDIR%</string>
             </dict>
